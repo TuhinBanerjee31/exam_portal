@@ -10,7 +10,7 @@ const Profile = () => {
 
   const fetchUserData = async () => {
     try {
-      const url = "http://localhost:3000/api/user/home";
+      const url = `${import.meta.env.VITE_BACKEND_URL}/api/user/home`;
       const headers = {
         headers: {
           auth: localStorage.getItem("auth"),
@@ -26,7 +26,7 @@ const Profile = () => {
 
   const fetchExamDetails = async (examId) => {
     try {
-      const url = "http://localhost:3000/api/user/examdetails";
+      const url = `${import.meta.env.VITE_BACKEND_URL}/api/user/examdetails`;
       const headers = {
         method: "POST",
         headers: {

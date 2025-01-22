@@ -12,7 +12,7 @@ const ExamDetails = (props) => {
 
   const fetchExamDetails = async () => {
     try {
-      const url = "http://localhost:3000/api/admin/examdetails";
+      const url = `${import.meta.env.VITE_BACKEND_URL}/api/admin/examdetails`;
       const options = {
         method: "POST", // Assuming it's a POST request based on the presence of a body
         headers: {

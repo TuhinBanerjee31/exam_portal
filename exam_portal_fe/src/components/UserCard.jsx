@@ -13,7 +13,7 @@ const UserCard = (props) => {
 
   const deleteUser = async () => {
     try {
-      const url = "http://localhost:3000/api/admin/user";
+      const url = `${import.meta.env.VITE_BACKEND_URL}/api/admin/user`;
       const headers = {
         method: "DELETE",
         headers: {

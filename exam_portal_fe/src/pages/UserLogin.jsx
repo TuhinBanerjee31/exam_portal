@@ -27,7 +27,7 @@ const UserLogin = () => {
       return handleError("email and password are required");
     }
     try {
-      const url = `http://localhost:3000/api/user/login`;
+      const url = `${import.meta.env.VITE_BACKEND_URL}/api/user/login`;
       const response = await fetch(url, {
         method: "POST",
         headers: {

@@ -85,7 +85,7 @@ const CreateUser = () => {
     });
 
     try {
-      const url = `http://localhost:3000/api/admin/user`;
+      const url = `${import.meta.env.VITE_BACKEND_URL}/api/admin/user`;
       const response = await fetch(url, {
         method: "POST",
         headers: {
@@ -119,7 +119,7 @@ const CreateUser = () => {
 
   const fetchExamsData = async () => {
     try {
-      const url = "http://localhost:3000/api/admin/exams";
+      const url = `${import.meta.env.VITE_BACKEND_URL}/api/admin/exams`;
       const headers = {
         headers: {
           token: localStorage.getItem("token"),

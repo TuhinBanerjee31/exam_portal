@@ -18,7 +18,7 @@ const Live = () => {
 
   const fetchUserData = async () => {
     try {
-      const url = "http://localhost:3000/api/user/home";
+      const url = `${import.meta.env.VITE_BACKEND_URL}/api/user/home`;
       const headers = {
         headers: {
           auth: localStorage.getItem("auth"),
@@ -52,7 +52,7 @@ const Live = () => {
         }
       });
 
-      const url = `http://localhost:3000/api/user/update`;
+      const url = `${import.meta.env.VITE_BACKEND_URL}/api/user/update`;
       const response = await fetch(url, {
         method: "PUT",
         headers: {

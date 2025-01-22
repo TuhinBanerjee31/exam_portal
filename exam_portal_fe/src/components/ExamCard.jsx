@@ -8,7 +8,7 @@ const ExamCard = (props) => {
 
     const deleteExam = async () => {
       try {
-        const url = "http://localhost:3000/api/admin/exam";
+        const url = `${import.meta.env.VITE_BACKEND_URL}/api/admin/exam`;
         const headers = {
           method: "DELETE",
           headers: {

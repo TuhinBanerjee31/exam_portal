@@ -8,7 +8,7 @@ const UserExamCard = (props) => {
 
   const fetchExamDetails = async () => {
     try {
-      const url = "http://localhost:3000/api/user/examdetails";
+      const url = `${import.meta.env.VITE_BACKEND_URL}/api/user/examdetails`;
       const headers = {
         method: "POST",
         headers: {

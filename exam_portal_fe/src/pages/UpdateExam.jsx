@@ -41,7 +41,7 @@ const UpdateExam = () => {
     }
 
     try {
-      const url = `http://localhost:3000/api/admin/exam`;
+      const url = `${import.meta.env.VITE_BACKEND_URL}/api/admin/exam`;
       const response = await fetch(url, {
         method: "PUT",
         headers: {

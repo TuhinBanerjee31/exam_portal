@@ -27,7 +27,7 @@ const AdminLogin = () => {
       return handleError("email and password are required");
     }
     try {
-      const url = `http://localhost:3000/api/admin/login`;
+      const url = `${import.meta.env.VITE_BACKEND_URL}/api/admin/login`;
       const response = await fetch(url, {
         method: "POST",
         headers: {

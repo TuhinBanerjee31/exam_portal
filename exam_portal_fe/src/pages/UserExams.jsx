@@ -10,7 +10,7 @@ const UserExams = () => {
 
   const fetchUserData = async () => {
     try {
-      const url = "http://localhost:3000/api/user/home";
+      const url = `${import.meta.env.VITE_BACKEND_URL}/api/user/home`;
       const headers = {
         headers: {
           auth: localStorage.getItem("auth"),

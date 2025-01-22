@@ -11,7 +11,7 @@ const Users = () => {
 
   const fetchUsersData = async () => {
     try {
-      const url = "http://localhost:3000/api/admin/users";
+      const url = `${import.meta.env.VITE_BACKEND_URL}/api/admin/users`;
       const headers = {
         headers: {
           token: localStorage.getItem("token"),
