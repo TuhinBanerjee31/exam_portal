@@ -5,7 +5,7 @@ const QuestionCard = (props) => {
 
   const handleOptionChange = (index) => {
     setSelectedIndex(index);
-    if (props.data.correctOption == index) {
+    if (props.data.correctOption == index+1) {
       props.marksHandler(props.data.marks); // Add marks if the selected option is correct
     }
   };

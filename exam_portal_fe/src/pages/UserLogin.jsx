@@ -125,12 +125,7 @@ const UserLogin = () => {
                       </label>
                     </div>
                   </div> */}
-                  {/* <a
-                    href="#"
-                    className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
-                  >
-                    Forgot password?
-                  </a> */}
+                  <span className="text-sm font-medium text-gray-500">Vist Our Official Website <a href="https://www.pmiusservices.com/" className="hover:underline">PMIUS</a>, For Further Queries.</span>
                 </div>
                 <button
                   type="submit"
