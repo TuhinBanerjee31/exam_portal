@@ -42,7 +42,7 @@ const UserLogin = () => {
         localStorage.setItem("auth", token);
         // localStorage.setItem("loggedInUser", name);
         setTimeout(() => {
-          navigate("/exams");
+          navigate("/courses");
         }, 1000);
       } else {
         handleError(message);

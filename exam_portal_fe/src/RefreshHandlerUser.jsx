@@ -12,7 +12,7 @@ function RefreshHandlerUser({ setIsAuthenticatedUser }) {
                 location.pathname === '/login' ||
                 location.pathname === '/admin/login'
             ) {
-                navigate('/exams');
+                navigate('/courses');
             }
         }
     }, [location, navigate, setIsAuthenticatedUser])
