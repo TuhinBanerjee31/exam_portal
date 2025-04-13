@@ -133,7 +133,7 @@ const UserLogin = () => {
                 >
                   Login
                 </button>
-                <p className="text-sm font-light text-gray-500 dark:text-gray-400">
+                {/* <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                   You don't have a user account?{" "}
                   <Link
                     to={"/admin/login"}
@@ -141,7 +141,7 @@ const UserLogin = () => {
                   >
                     Admin Login
                   </Link>
-                </p>
+                </p> */}
               </form>
             </div>
           </div>

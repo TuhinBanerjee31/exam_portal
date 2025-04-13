@@ -13,6 +13,8 @@ adminRouter.post("/signup", async function (req, res) {
     password: z.string().min(6).max(50),
   });
 
+  console.log("here");
+
   const parsedData = objectSchema.safeParse(req.body);
 
   if (!parsedData.success) {
@@ -68,6 +70,7 @@ adminRouter.post("/user", adminMiddleware, async function (req, res) {
     email: z.string().email(),
     username: z.string(),
     password: z.string().min(6).max(50),
+    showResult: z.boolean().optional(),
     exams: z
       .array(
         z.object({ examId: z.string(), score: z.number(), status: z.boolean() })
@@ -96,7 +99,7 @@ adminRouter.post("/user", adminMiddleware, async function (req, res) {
   try {
     const { email, username, password, exams, orderStatus } = req.body;
 
-    await userModel.create({ email, username, password, exams, orderStatus });
+    await userModel.create({ email, username, password, exams, orderStatus, showResult: false });
     res.json({ message: "User was created successfully", success: true });
   } catch (error) {
     res.status(500).json({
@@ -113,6 +116,7 @@ adminRouter.put("/user", adminMiddleware, async function (req, res) {
     email: z.string().email(),
     username: z.string(),
     password: z.string().min(6).max(50),
+    showResult: z.boolean().optional(),
     exams: z
       .array(
         z.object({ examId: z.string(), score: z.number(), status: z.boolean() })
@@ -139,7 +143,7 @@ adminRouter.put("/user", adminMiddleware, async function (req, res) {
   }
 
   try {
-    const { _id, email, username, password, exams, orderStatus } = req.body;
+    const { _id, email, username, password, exams, orderStatus, showResult } = req.body;
 
     await userModel.updateOne(
       { _id: _id },
@@ -152,6 +156,18 @@ adminRouter.put("/user", adminMiddleware, async function (req, res) {
       success: false,
     });
   }
+});
+
+//ROUTE TO TOGGLE RESULT
+adminRouter.put("/toggle-result", adminMiddleware, async function (req, res) {
+  const dataSet = req.body;
+console.log(dataSet._id)
+console.log(dataSet.showResult)
+  await userModel.updateOne(
+    { _id: dataSet._id },
+    { showResult: dataSet.showResult }
+  );
+  res.json({ success: true, message: "Result Status Changed." });
 });
 
 // ROUTE TO DELETE USER
@@ -173,6 +189,7 @@ adminRouter.post("/exam", adminMiddleware, async function (req, res) {
   try {
     const dataSet = req.body;
     let totalMarks = 0;
+    let showResult = false;
 
     // Basic validation
     if (!dataSet || !dataSet.title || !dataSet.data) {
@@ -199,7 +216,12 @@ adminRouter.post("/exam", adminMiddleware, async function (req, res) {
     );
 
     // Create exam entry in the database
-    await examModel.create({ title, totalMarks, data: formattedQuestions });
+    await examModel.create({
+      title,
+      showResult,
+      totalMarks,
+      data: formattedQuestions,
+    });
 
     // Respond success
     res.json({
@@ -248,8 +270,8 @@ adminRouter.delete("/exam", adminMiddleware, async function (req, res) {
 adminRouter.post("/examdetails", adminMiddleware, async function (req, res) {
   const dataSet = req.body;
 
-  const examDetails = await examModel.findOne({_id: dataSet._id});
-  console.log(examDetails)
+  const examDetails = await examModel.findOne({ _id: dataSet._id });
+  console.log(examDetails);
   res.json({ examDetails });
 });
 

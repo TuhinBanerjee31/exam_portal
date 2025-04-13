@@ -5,8 +5,10 @@ import Footer from "../components/Footer";
 import CustomCheckbox from "../components/CustomCheckbox";
 import { ToastContainer } from "react-toastify";
 import { handleError, handleSuccess } from "../utils";
+import { Eye, EyeOff, RefreshCw } from "lucide-react";
 
 const CreateUser = () => {
+  const [showPassword, setShowPassword] = useState(false);
   const [examsData, setExamsData] = useState([]);
   const [userInfo, setUserInfo] = useState({
     email: "",
@@ -37,6 +39,17 @@ const CreateUser = () => {
       completed: false,
     },
   ]);
+
+  const generatePassword = () => {
+    const length = 12;
+    const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+";
+    let password = "";
+    for (let i = 0; i < length; i++) {
+      const randomIndex = Math.floor(Math.random() * charset.length);
+      password += charset[randomIndex];
+    }
+    setUserInfo(prev => ({ ...prev, password }));
+  };
 
   const toggleStatus = (id) => {
     setStatuses((prevStatuses) =>
@@ -104,7 +117,6 @@ const CreateUser = () => {
       const { success, message } = result;
       if (success) {
         handleSuccess(message);
-        // localStorage.setItem("loggedInUser", name);
         setTimeout(() => {
           navigate("/admin/users");
         }, 1000);
@@ -138,12 +150,9 @@ const CreateUser = () => {
     fetchExamsData();
   }, []);
 
-  console.log(exams);
-  console.log(statuses);
-
   return (
     <div>
-      <Navbar />
+       <Navbar />
       <form className="min-h-screen pt-24 pb-10" onSubmit={handleCreateUser}>
         <h1 className="text-center text-2xl font-semibold tracking-wide py-3">
           Create New User
@@ -169,12 +178,12 @@ const CreateUser = () => {
             />
           </div>
 
-          <div>
+          <div className="mt-4">
             <label
               htmlFor="username"
               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >
-              Your email
+              Username
             </label>
             <input
               type="text"
@@ -188,23 +197,43 @@ const CreateUser = () => {
             />
           </div>
 
-          <div>
+          <div className="mt-4">
             <label
               htmlFor="password"
               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >
               Password
             </label>
-            <input
-              type="password"
-              name="password"
-              id="password"
-              placeholder="••••••••"
-              onChange={handleChange}
-              value={userInfo.password}
-              className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              required=""
-            />
+            <div className="relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                name="password"
+                id="password"
+                placeholder="••••••••"
+                onChange={handleChange}
+                value={userInfo.password}
+                className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 pr-20 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                required=""
+              />
+              <div className="absolute inset-y-0 right-0 flex items-center pr-3 gap-2">
+                <button
+                  type="button"
+                  onClick={generatePassword}
+                  className="text-gray-500 hover:text-gray-200 transition-colors duration-300 focus:outline-none"
+                  title="Generate Password"
+                >
+                  <RefreshCw size={20} />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="text-gray-500 hover:text-gray-200 transition-colors duration-300 focus:outline-none"
+                  title={showPassword ? "Hide Password" : "Show Password"}
+                >
+                  {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                </button>
+              </div>
+            </div>
           </div>
         </div>
 

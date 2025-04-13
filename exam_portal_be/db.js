@@ -12,6 +12,7 @@ const userSchema = new Schema({
     username: { type: String, unique: true },
     email: { type: String, unique: true },
     password: String,
+    showResult: Boolean,
     exams: {type: Array, "default": []},
     orderStatus: {type: Array, "default": []},
 })

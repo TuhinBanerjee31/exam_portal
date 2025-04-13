@@ -38,7 +38,7 @@ const UserExams = () => {
           Welcome, {userData && userData.username}
         </h1>
         <h1 className="text-center text-2xl font-semibold tracking-wide py-3">
-          Alotted Exams
+          Alotted Courses
         </h1>
 
         <div className="flex flex-wrap max-w-screen-xl justify-around gap-5 items-center mx-auto py-8">

@@ -8,6 +8,15 @@ import { handleError, handleSuccess } from "../utils";
 
 const Users = () => {
   const [allUsers, setAllUsers] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const filteredusers = allUsers.filter((user) =>
+    user.username.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+  };
 
   const fetchUsersData = async () => {
     try {
@@ -35,7 +44,10 @@ const Users = () => {
       <Navbar />
       <div className="min-h-screen">
         <div className="pt-24 w-full px-4">
-          <form className="flex items-center max-w-screen-sm mx-auto">
+          <form
+            onSubmit={handleSearch}
+            className="flex items-center max-w-screen-sm mx-auto"
+          >
             <label for="simple-search" className="sr-only">
               Search
             </label>
@@ -62,6 +74,8 @@ const Users = () => {
                 id="simple-search"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Search by username..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
                 required
               />
             </div>
@@ -100,9 +114,20 @@ const Users = () => {
             All Users
           </h1>
           <div className="flex flex-wrap gap-5 justify-center">
-            {allUsers.map(item => (
+            {filteredusers.map((item) => (
               <UserCard key={item._id} data={item} />
             ))}
+
+            {filteredusers.length === 0 && (
+              <div className="text-center py-12">
+                <h3 className="text-xl font-medium text-gray-500">
+                  No user found
+                </h3>
+                <p className="text-gray-400 mt-2">
+                  Try a different search term
+                </p>
+              </div>
+            )}
           </div>
         </div>
 

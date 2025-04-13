@@ -45,7 +45,7 @@ function App() {
     <Route path='admin/exams' element={<PrivateRoute element={<Exams />} />} />
     <Route path='admin/update-exam' element={<PrivateRoute element={<UpdateExam />} />} />
     <Route path='admin/create-exam' element={<PrivateRoute element={<CreateExam />} />}/>
-    <Route path='/exams' element={<PublicRoute element={<UserExams />} />} />
+    <Route path='/courses' element={<PublicRoute element={<UserExams />} />} />
     <Route path='/live' element={<PublicRoute element={<Live />} />} />
     <Route path='/profile' element={<PublicRoute element={<Profile />} />} />
     </Routes>

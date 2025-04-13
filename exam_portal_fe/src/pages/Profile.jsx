@@ -79,12 +79,12 @@ const Profile = () => {
 
           {/* Exam Information */}
           <div className="mb-6">
-            <h3 className="text-xl font-semibold text-gray-800 mb-4">Exams</h3>
+            <h3 className="text-xl font-semibold text-gray-800 mb-4">Courses Stats</h3>
             <div className="overflow-x-auto">
               <table className="min-w-full bg-white border border-gray-200">
                 <thead>
                   <tr>
-                    <th className="py-2 px-4 border-b">Exam</th>
+                    <th className="py-2 px-4 border-b">Name</th>
                     <th className="py-2 px-4 border-b">Score</th>
                     <th className="py-2 px-4 border-b">Status</th>
                   </tr>
@@ -95,9 +95,9 @@ const Profile = () => {
                       <td className="py-2 px-4 border-b text-center">
                         {examDetails[exam.examId] || "Loading..."}
                       </td>
-                      <td className="py-2 px-4 border-b text-center">{exam.score}</td>
+                      <td className="py-2 px-4 border-b text-center">{userData.showResult ? exam.score : 0}</td>
                       <td className="py-2 px-4 border-b text-center">
-                        {exam.status ? "Completed" : "Pending"}
+                        {(exam.status && userData.showResult) ? "Completed" : "Pending"}
                       </td>
                     </tr>
                   ))}

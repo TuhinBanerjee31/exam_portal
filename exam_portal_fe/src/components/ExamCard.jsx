@@ -49,14 +49,14 @@ const ExamCard = (props) => {
       <p className="mb-3 font-normal text-gray-500 dark:text-gray-400">
         Total Marks: {props.data.totalMarks}
       </p>
-      <div
+      {/* <div
         className="inline-flex font-medium items-center gap-10 justify-center text-blue-600 hover:underline"
       >
         <EyeIcon class="h-6 w-6" />
         <Link to="/admin/update-exam" state={props.data}><PencilSquareIcon class="h-6 w-6" /></Link>
         <DocumentCheckIcon class="h-6 w-6" />
         <TrashIcon class="h-6 w-6" onClick={deleteExam} />
-      </div>
+      </div> */}
     </div>
   )
 }

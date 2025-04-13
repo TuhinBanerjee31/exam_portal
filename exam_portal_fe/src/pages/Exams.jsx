@@ -8,6 +8,15 @@ import { handleError, handleSuccess } from "../utils";
 
 const Exams = () => {
   const [allExams, setAllExams] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const filteredExams = allExams.filter((exam) =>
+    exam.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+  };
 
   const fetchExamsData = async () => {
     try {
@@ -35,7 +44,10 @@ const Exams = () => {
       <Navbar />
       <div className="min-h-screen">
         <div className="pt-24 w-full px-4">
-          <form className="flex items-center max-w-screen-sm mx-auto">
+          <form
+            onSubmit={handleSearch}
+            className="flex items-center max-w-screen-sm mx-auto"
+          >
             <label for="simple-search" className="sr-only">
               Search
             </label>
@@ -62,6 +74,8 @@ const Exams = () => {
                 id="simple-search"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Search by exam name..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
                 required
               />
             </div>
@@ -86,12 +100,12 @@ const Exams = () => {
               </svg>
               <span className="sr-only">Search</span>
             </button>
-            <Link
+            {/* <Link
               to={"/admin/create-exam"}
               className="w-44 ml-4 text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800"
             >
               New Exam
-            </Link>
+            </Link> */}
           </form>
         </div>
 
@@ -100,9 +114,20 @@ const Exams = () => {
             All Exams
           </h1>
           <div className="flex flex-wrap gap-5 justify-center">
-            {allExams.map((item) => (
+            {filteredExams.map((item) => (
               <ExamCard key={item._id} data={item} />
             ))}
+
+            {filteredExams.length === 0 && (
+              <div className="text-center py-12">
+                <h3 className="text-xl font-medium text-gray-500">
+                  No exams found
+                </h3>
+                <p className="text-gray-400 mt-2">
+                  Try a different search term
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </div>
