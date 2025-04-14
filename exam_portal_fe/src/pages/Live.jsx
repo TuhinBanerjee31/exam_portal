@@ -74,7 +74,7 @@ const Live = () => {
       if (success) {
         handleSuccess(message);
         setTimeout(() => {
-          navigate("/exams");
+          navigate("/courses");
         }, 1000);
       } else {
         handleError(message);
